@@ -1,0 +1,18 @@
+steps:
+  - task: apache::ctl
+    target: rossepsteinforge2c.mylabserver.com
+    description: "Shuts down Apache service"
+    parameters:
+      command: graceful-stop
+  - command: "cp /etc/httpd/logs/access_log /tmp/apache_access"
+
+    target: rossepsteinforge2c.mylabserver.com
+    description: "Copy apache access logs"
+  - task: package
+    target: rossepsteinforge2c.mylabserver.com
+    description: "Remove Apache"
+    parameters:
+      action: uninstall
+      name: httpd
+
+
